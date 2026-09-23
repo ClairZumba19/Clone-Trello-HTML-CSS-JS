@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <script src="main.js" defer></script>
+    <title>Clone do Trello</title>
+</head>
+
+<body>
+    <div class="app">
+
+        <header class="app-header">
+            <div class="app-header__brand">
+                <div class="app-header__logo">Clone</div>
+                <h1 class="app-header__title">Trello</h1>
+            </div>
+            <button class="btn btn--primary" id="add-list-btn" type="button">
+                + Nova lista
+            </button>
+        </header>
+
+        
+        <main class="board-wrapper">
+            <div class="board" id="board"></div>
+        </main>
+
+    </div>
+
+    <template id="list-template">
+        <div class="list" draggable="true">
+            <div class="list__header">
+                <h2 class="list__title"></h2>
+                <span class="list__count"></span>
+                <div class="list__actions">
+                    <button class="icon-btn" data-action="edit-list" type="button" title="Editar lista"
+                        aria-label="Editar lista">✏️</button>
+                    <button class="icon-btn icon-btn--danger" data-action="delete-list" type="button"
+                        title="Excluir lista" aria-label="Excluir lista">🗑️</button>
+                </div>
+            </div>
+            <div class="list__cards"></div>
+            <button class="add-card-btn" data-action="add-card" type="button">+ adicionar cartão</button>
+        </div>
+    </template>
+
+    <template id="card-template">
+        <div class="card" draggable="true">
+            <div class="card__top">
+                <h3 class="card__title"></h3>
+                <div class="card__actions">
+                    <button class="icon-btn icon-btn--sm" data-action="duplicate-card" type="button"
+                        title="Duplicar cartão" aria-label="Duplicar cartão">⧉</button>
+                    <button class="icon-btn icon-btn--sm" data-action="edit-card" type="button" title="Editar cartão"
+                        aria-label="Editar cartão">✏️</button>
+                    <button class="icon-btn icon-btn--sm icon-btn--danger" data-action="delete-card" type="button"
+                        title="Excluir cartão" aria-label="Excluir cartão">🗑️</button>
+                </div>
+            </div>
+            <p class="card__description"></p>
+        </div>
+    </template>
+
+   
+    <div class="modal-overlay" id="card-modal" hidden>
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="card-modal-title">
+            <div class="modal__header">
+                <h2 class="modal__title" id="card-modal-title">Novo cartão</h2>
+                <button class="icon-btn" id="card-modal-close" type="button" aria-label="Fechar">✕</button>
+            </div>
+
+            <form id="card-form">
+                <div class="field">
+                    <label class="field__label" for="card-title-input">Título</label>
+                    <input class="field__input" id="card-title-input" type="text" maxlength="80" required>
+                </div>
+
+                <div class="field field--spaced">
+                    <label class="field__label" for="card-desc-input">Descrição</label>
+                    <textarea class="field__textarea" id="card-desc-input" maxlength="280"></textarea>
+                </div>
+
+                <div class="field field--spaced">
+                    <label class="field__label" for="card-date-input">Data (opcional)</label>
+                    <input class="field__input" id="card-date-input" type="date">
+                </div>
+
+                <div class="modal__footer modal__footer--spaced">
+                    <button class="btn btn--ghost" id="card-modal-cancel" type="button">Cancelar</button>
+                    <button class="btn btn--primary" id="card-modal-save" type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
